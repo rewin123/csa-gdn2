@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+data/
+ckpts_10m/
+*.pt
+.DS_Store
+GatedDeltaNet-2/

@@ -1,0 +1,28 @@
+{
+  "full": 3.980852499008179,
+  "all_gdn_off": 5.344338073730468,
+  "per_layer": {
+    "1": 4.576656932830811,
+    "3": 4.398542137145996,
+    "5": 4.180006165504455
+  },
+  "gdn_layer_indices": [
+    1,
+    3,
+    5
+  ],
+  "delta_all_off": 1.3634855747222896,
+  "_meta": {
+    "model": "C (CSA+GDN-2)",
+    "ckpt": "ckpts_10m/C_final.pt @1357M tokens",
+    "body_params": 10002824,
+    "gdn_layers": [
+      1,
+      3,
+      5
+    ],
+    "eval": "fineweb val CE, n=50 batches, ctx2048, batch4, seed0",
+    "method": "forward-hook zeroes GDN sublayer output (residual passes through)",
+    "conclusion": "GDN-2 layers are load-bearing: zeroing all 3 raises CE +1.36 nats (3.98->5.34). Refutes the hypothesis that GDN layers were under-trained/inactive due to 0.1x LR. Verified separately that C's main-path GDN layers train at full 4e-4/wd0.1 AdamW (0.1x mult applies only to gist gate, absent in C). Early layer 1 matters most (+0.60) > layer 3 (+0.42) > layer 5 (+0.20)."
+  }
+}

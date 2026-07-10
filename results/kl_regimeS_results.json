@@ -1,0 +1,102 @@
+{
+ "cell": {
+  "seq": 256,
+  "N": 48,
+  "topk": 16,
+  "Q": 8,
+  "m": 4,
+  "sw": 8,
+  "steps": 20000
+ },
+ "metric": "MV-NIAH selection recall, mean of 8 seeds",
+ "note": "B added 2026-07-03: [gdn,csa] GDN-first ordering, KL recipe. Largest KL gain (+0.448) but ordering C(CSA-first)>B(GDN-first) preserved.",
+ "rows": [
+  {
+   "model": "SWA-A",
+   "arch": "GDN-2+SWA (frozen)",
+   "mean": 0.036,
+   "std": 0.034,
+   "reach05": "0/8",
+   "derail": "8/8",
+   "grok_step": null,
+   "frozen_mean": 0.036,
+   "delta_kl": null
+  },
+  {
+   "model": "SWA-B",
+   "arch": "SWA+GDN-2 (frozen)",
+   "mean": 0.052,
+   "std": 0.05,
+   "reach05": "0/8",
+   "derail": "8/8",
+   "grok_step": null,
+   "frozen_mean": 0.052,
+   "delta_kl": null
+  },
+  {
+   "model": "A",
+   "arch": "CSA+CSA (KL)",
+   "mean": 0.662,
+   "std": 0.137,
+   "reach05": "7/8",
+   "derail": "0/8",
+   "grok_step": 8400,
+   "frozen_mean": 0.287,
+   "delta_kl": 0.375
+  },
+  {
+   "model": "B",
+   "arch": "GDN-2+CSA (KL)",
+   "mean": 0.619,
+   "std": 0.207,
+   "reach05": "5/8",
+   "derail": "2/8",
+   "grok_step": 5400,
+   "frozen_mean": 0.171,
+   "delta_kl": 0.448
+  },
+  {
+   "model": "C",
+   "arch": "CSA+GDN-2 (KL)",
+   "mean": 0.753,
+   "std": 0.158,
+   "reach05": "7/8",
+   "derail": "1/8",
+   "grok_step": 5000,
+   "frozen_mean": 0.519,
+   "delta_kl": 0.234
+  },
+  {
+   "model": "PCat",
+   "arch": "+gist concat (KL)",
+   "mean": 0.708,
+   "std": 0.196,
+   "reach05": "7/8",
+   "derail": "1/8",
+   "grok_step": 4600,
+   "frozen_mean": 0.546,
+   "delta_kl": 0.162
+  },
+  {
+   "model": "WAdd-sel",
+   "arch": "+gist additive (KL)",
+   "mean": 0.618,
+   "std": 0.154,
+   "reach05": "6/8",
+   "derail": "1/8",
+   "grok_step": 7700,
+   "frozen_mean": 0.26,
+   "delta_kl": 0.358
+  }
+ ],
+ "B_per_seed": [
+  0.4592,
+  0.7061,
+  0.7351,
+  0.801,
+  0.8037,
+  0.8232,
+  0.3015,
+  0.323
+ ]
+}

@@ -1,0 +1,78 @@
+{
+  "regime": "S",
+  "sweep_axis": "topk",
+  "cell": {
+    "seq": 256,
+    "nb": 62,
+    "K": 8,
+    "Q": 8,
+    "sw": 8,
+    "m": 4,
+    "contention": 1.0,
+    "steps": 8000,
+    "rank_steps": 20000,
+    "fixed_N": 48,
+    "warmup_steps": 2000,
+    "nonbinding_topk": 62,
+    "sweet_target": 0.2,
+    "gdn_recipe": "AdamW 4e-4 wd0.1"
+  },
+  "sweep": {},
+  "sweet": 16,
+  "moe": {
+    "A": 844,
+    "LinFull": 882
+  },
+  "runs": {
+    "LinFull:0": {
+      "cand": "LinFull",
+      "seed": 0,
+      "recall": 0.884521484375
+    },
+    "LinFull:1": {
+      "cand": "LinFull",
+      "seed": 1,
+      "recall": 0.8974609375
+    },
+    "LinFull:2": {
+      "cand": "LinFull",
+      "seed": 2,
+      "recall": 0.817626953125
+    },
+    "LinFull:3": {
+      "cand": "LinFull",
+      "seed": 3,
+      "recall": 0.876708984375
+    },
+    "LinFull:4": {
+      "cand": "LinFull",
+      "seed": 4,
+      "recall": 0.83837890625
+    },
+    "LinFull:5": {
+      "cand": "LinFull",
+      "seed": 5,
+      "recall": 0.89599609375
+    },
+    "LinFull:6": {
+      "cand": "LinFull",
+      "seed": 6,
+      "recall": 0.828857421875
+    },
+    "LinFull:7": {
+      "cand": "LinFull",
+      "seed": 7,
+      "recall": 0.850341796875
+    }
+  },
+  "summary": {
+    "LinFull": {
+      "n": 8,
+      "mean": 0.8612,
+      "std": 0.0294,
+      "median": 0.8503,
+      "grok_rate": 1.0,
+      "derail_rate": 0.0
+    }
+  }
+}

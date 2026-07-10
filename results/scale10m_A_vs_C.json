@@ -1,0 +1,51 @@
+{
+  "scale": "10M non-embedding weights (body)",
+  "data": "FineWeb + 10% instruct",
+  "ctx": 2048,
+  "depth": 6,
+  "hidden": 384,
+  "heads": 6,
+  "wall_minutes_each": 240,
+  "kl": true,
+  "batch": 4,
+  "grad_accum": 12,
+  "gpu": "RTX 3090",
+  "A": {
+    "cand": "DeepSeek (all-CSA)",
+    "ffn": 565,
+    "body_params": 9998318,
+    "total_params": 29297006,
+    "final_step": 9017,
+    "tokens": 886407168,
+    "fineweb_loss": 4.0985,
+    "openhermes_loss": 2.0678,
+    "niah_zero": 10.389,
+    "niah_one": 10.551,
+    "it_per_s": 0.25,
+    "tokens_note": "= final_step 9017 * 98304 tok/step (true stop after 4h+6h)"
+  },
+  "C": {
+    "cand": "C (CSA+GDN-2)",
+    "ffn": 862,
+    "body_params": 10002824,
+    "total_params": 29301512,
+    "final_step": 13802,
+    "tokens": 1356791808,
+    "fineweb_loss": 4.0297,
+    "openhermes_loss": 2.0663,
+    "niah_zero": 10.962,
+    "niah_one": 11.272,
+    "it_per_s": 0.38,
+    "tokens_note": "= final_step 13802 * 98304 tok/step (true stop after 4h+6h)"
+  },
+  "throughput_speedup_C_over_A": 1.531,
+  "final_vs_final_C_better_nats": 0.0687,
+  "note": "After 10h/model (4h + 6h resume from checkpoint): C trains x1.53 more tokens in equal wall (1357M vs 886M) AND reaches lower loss (final 4.030 vs 4.098; at matched 886M tokens C 4.067 vs A 4.098, C -0.031 nats). Result holds and slightly widens vs the 4h-only run. Consistent with 124M finding (1.49x). NIAH still weak at 10M, C marginally better at mid-depths.",
+  "training": "4h initial + 6h resume = 10h/model total",
+  "matched_token_at_A_final": {
+    "tokens_M": 884.8,
+    "A_fineweb": 4.0985,
+    "C_fineweb": 4.0671,
+    "C_minus_A": -0.0314
+  }
+}

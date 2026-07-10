@@ -1,0 +1,75 @@
+{
+  "batch": 1,
+  "reps": 40,
+  "dtype": "bfloat16",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "data": {
+    "A": {
+      "512": {
+        "latency_ms": 55.819,
+        "tokens_per_s": 9172.5,
+        "peak_gb": 0.18
+      },
+      "1024": {
+        "latency_ms": 56.217,
+        "tokens_per_s": 18215.3,
+        "peak_gb": 0.237
+      },
+      "2048": {
+        "latency_ms": 56.812,
+        "tokens_per_s": 36048.8,
+        "peak_gb": 0.386
+      },
+      "3072": {
+        "latency_ms": 70.271,
+        "tokens_per_s": 43716.2,
+        "peak_gb": 0.692
+      },
+      "4096": {
+        "latency_ms": 99.198,
+        "tokens_per_s": 41291.0,
+        "peak_gb": 1.116
+      }
+    },
+    "C": {
+      "512": {
+        "latency_ms": 46.365,
+        "tokens_per_s": 11042.7,
+        "peak_gb": 0.281
+      },
+      "1024": {
+        "latency_ms": 46.474,
+        "tokens_per_s": 22033.7,
+        "peak_gb": 0.335
+      },
+      "2048": {
+        "latency_ms": 47.515,
+        "tokens_per_s": 43102.2,
+        "peak_gb": 0.467
+      },
+      "3072": {
+        "latency_ms": 48.459,
+        "tokens_per_s": 63394.2,
+        "peak_gb": 0.754
+      },
+      "4096": {
+        "latency_ms": 56.961,
+        "tokens_per_s": 71908.4,
+        "peak_gb": 1.152
+      }
+    }
+  },
+  "speedup_C_over_A": {
+    "512": 1.204,
+    "1024": 1.21,
+    "2048": 1.196,
+    "3072": 1.45,
+    "4096": 1.742
+  },
+  "_meta": {
+    "models": "A=DeepSeek all-CSA (ffn565), C=CSA+GDN-2 (ffn862), 10M body, from ckpts_10m/*_final.pt",
+    "measure": "PREFILL: full-sequence forward-pass latency (cache-free). No incremental decode-with-cache path exists (GDN-2 layer is training-only, use_cache=False).",
+    "why_not_llama_cpp": "CSA and GDN-2 are custom architectures not supported by llama.cpp/GGUF; quantizing to GGUF would require a custom C++ backend for both layers.",
+    "conclusion": "C is faster at every context length; advantage grows with context (x1.20 @512 -> x1.74 @4096). A (all-CSA) prefill latency bends up sharply past 2048 (56.8->99.2ms), C stays near-linear (47.5->57.0ms) - the linear-attention scaling signature."
+  }
+}

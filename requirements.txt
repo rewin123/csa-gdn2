@@ -1,0 +1,10 @@
+# Pinned to the exact versions used for the paper (Python 3.12, CUDA 12.8, RTX 3090).
+# GDN-2's Triton chunk kernel requires a CUDA GPU; CPU-only will not run the linear layer.
+torch==2.9.0
+triton==3.5.0
+einops==0.8.2
+tiktoken==0.13.0
+numpy==2.4.6
+matplotlib==3.11.0
+# optional: experiment tracking
+aim
