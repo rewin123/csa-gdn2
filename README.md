@@ -141,6 +141,18 @@ This measures **prefill only** (the GDN-2 layer here is implemented cache-free);
 incremental decoding depends on runtime kernel/KV-cache implementation and is out of
 scope.
 
+### Experiment 5 — Analytic prefill FLOPs (A vs C, all three scales)
+Count prefill FLOPs for the parameter-matched A and C models at 1M / 10M / 124M across a
+context sweep, to separate the structural cost difference from hardware efficiency:
+```bash
+python csa_flops.py --out results/csa_flops.json
+```
+Uses PyTorch's operator-level FLOP counter (captures the CSA compressor, Lightning
+Indexer, sliding-window attention, MLP and LM head) plus an analytic term for the GDN-2
+chunk recurrence (a fused kernel the counter does not see). The A/C FLOP ratio grows with
+context (e.g. 10M: 1.05× at 512 → 1.31× at 4096) and sits **below** the measured
+wall-clock speedup — the surplus is GPU-utilization efficiency, not arithmetic.
+
 ---
 
 ## Repository layout
@@ -165,6 +177,7 @@ reproduce/
 │   └── runlog.py
 ├── csa_gdn_ablate.py          # Exp-3 entry: GDN-2 layer ablation
 ├── csa_infer_bench.py         # Exp-4 entry: prefill latency A vs C
+├── csa_flops.py              # Exp-5 entry: analytic prefill FLOPs A vs C
 ├── figures/                   # the 4 paper figures (fig1..fig4)
 └── results/                   # the result JSONs behind every number above
 ```
