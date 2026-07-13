@@ -3,6 +3,9 @@
 Reproduction code for the paper **"Combining Linear Attention with Compressed Sparse
 Attention: How Best to Mix Gated DeltaNet-2 into a CSA Stack"** (Andrei Iamaev).
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21339494.svg)](https://doi.org/10.5281/zenodo.21339494)
+Preprint: [10.5281/zenodo.21339494](https://doi.org/10.5281/zenodo.21339494)
+
 We interleave / condition an NVIDIA **Gated DeltaNet-2 (GDN-2)** linear-attention layer
 with **DeepSeek-V4's Compressed Sparse Attention (CSA)** and ask which combination is
 best. The headline: **interleaving** a GDN-2 layer with a CSA layer (candidate **C**)
@@ -205,11 +208,13 @@ clone it yourself from https://github.com/NVlabs/GatedDeltaNet-2 (see Setup).
 ## Citation
 ```bibtex
 @misc{iamaev2026csagdn2,
-  title  = {Combining Linear Attention with Compressed Sparse Attention:
-            How Best to Mix Gated DeltaNet-2 into a CSA Stack},
-  author = {Andrei Iamaev},
-  year   = {2026},
-  eprint = {arXiv:XXXX.XXXXX},
-  note   = {Code: https://github.com/rewin123/csa-gdn2}
+  title     = {Combining Linear Attention with Compressed Sparse Attention:
+               How Best to Mix Gated DeltaNet-2 into a CSA Stack},
+  author    = {Andrei Iamaev},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21339494},
+  url       = {https://doi.org/10.5281/zenodo.21339494},
+  note      = {Code: https://github.com/rewin123/csa-gdn2}
 }
 ```
